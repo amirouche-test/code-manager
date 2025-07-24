@@ -34,8 +34,7 @@
     "mac": {
       "icon": "icon.icns",          
       "target": [
-        "dmg",                       
-        "zip"                       
+        "dmg"                    
       ]
     }
   },

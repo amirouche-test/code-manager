@@ -1,0 +1,33 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'          # Quand tu crées un tag comme v1.0.0
+
+jobs:
+  build:
+    runs-on: macos-latest    # ⚠️ obligatoire pour builder macOS (dmg) ET windows (exe)
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build app for all platforms
+        run: npm run build
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.dmg
+            dist/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
