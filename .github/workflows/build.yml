@@ -7,7 +7,9 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest    # ⚠️ obligatoire pour builder macOS (dmg) ET windows (exe)
+    runs-on: macos-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}   # 👈 ajouter cette ligne
 
     steps:
       - uses: actions/checkout@v3
