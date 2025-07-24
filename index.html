@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestion des Codes de Carrelage</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Gestion des Codes de Carrelage</h1>
+      <button id="toggleTheme" class="theme-toggle">🌙 Mode sombre</button>
+    </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Rechercher par code chimique ou commercial...">
+    </div>
+    
+    <!-- Formulaire d'ajout -->
+    <form id="addCodeForm">
+      <input type="text" id="codeChimique" placeholder="Code Chimique" required />
+      <input type="text" id="codeCommercial" placeholder="Code Commercial" required />
+      <button type="submit">Ajouter</button>
+    </form>
+
+    <!-- Tableau des codes -->
+    <table>
+      <thead>
+        <tr>
+          <th>Code Chimique</th>
+          <th>Code Commercial</th>
+          <th>Date Création</th>
+          <th>Dernière Modification</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="codesList">
+        <!-- Lignes ajoutées dynamiquement -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal modification -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Modifier le code</h2>
+      <form id="editCodeForm">
+        <div class="modal-field-row">
+          <label for="editCodeChimique">Code Chimique :</label>
+          <input type="text" id="editCodeChimique" required>
+        </div>
+        <div class="modal-field-row">
+          <label for="editCodeCommercial">Code Commercial :</label>
+          <input type="text" id="editCodeCommercial" required>
+        </div>
+        <div class="modal-actions">
+          <button type="submit">Enregistrer</button>
+          <button type="button" id="cancelEdit">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal confirmation suppression -->
+  <div id="confirmDeleteModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Confirmer la suppression</h2>
+      <p style="text-align:center; margin:1rem 0;">Êtes-vous sûr de vouloir supprimer ce code ?</p>
+      <div class="modal-actions">
+        <button id="confirmDeleteBtn">Oui</button>
+        <button type="button" id="cancelDeleteBtn">Non</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

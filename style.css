@@ -1,0 +1,367 @@
+:root {
+  /* 🌞 Light mode - Parrot OS Inspired */
+  --bg-color: #f0f8ff;                 /* Alice Blue */
+  --container-bg: #e8f1fb;
+  --text-color: #0b0c10;
+  --primary-color: #008080;            /* Teal */
+  --primary-hover: #006666;
+  --success-color: #00ff9c;            /* Vert néon Parrot */
+  --success-hover: #00cc7a;
+  --danger-color: #ff1744;             /* Rouge vif */
+  --danger-hover: #c4001d;
+  --border-color: #cfd8dc;
+  --thead-bg: #008080;
+  --thead-text: #ffffff;
+  --input-focus: #00ff9c;
+}
+
+body.dark-mode {
+  /* 🌙 Dark mode - Parrot OS Inspired */
+  --bg-color: #0e1116;
+  --container-bg: #13181f;
+  --text-color: #e0f7fa;
+  --primary-color: #00e5ff;            /* Bleu néon */
+  --primary-hover: #00bcd4;
+  --success-color: #00ff9c;
+  --success-hover: #00cc7a;
+  --danger-color: #ff5252;
+  --danger-hover: #ff1744;
+  --border-color: #263238;
+  --thead-bg: #00e5ff;
+  --thead-text: #0e1116;
+  --input-focus: #00ff9c;
+}
+
+
+/* Reset & base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  min-width: 1000px;
+  background-color: var(--container-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+}
+
+.theme-toggle {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* 🔎 Barre de recherche */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.search-bar input[type="text"] {
+  padding: 0.6rem 1rem;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-bar input[type="text"]:focus {
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+/* Formulaire ajout */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+form input {
+  flex: 1 1 200px;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+form input:focus {
+  border-color: var(--input-focus);
+  outline: none;
+}
+
+form button {
+  padding: 0.6rem 1.4rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+form button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: var(--thead-bg);
+  color: var(--thead-text);
+}
+
+th, td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1rem;
+}
+
+td:nth-child(1), th:nth-child(1),
+td:nth-child(2), th:nth-child(2) {
+  text-align: left;
+}
+
+td:nth-child(3), th:nth-child(3),
+td:nth-child(4), th:nth-child(4) {
+  text-align: center;
+}
+
+td:last-child, th:last-child {
+  text-align: right;
+}
+
+tbody tr:hover {
+  background-color: rgba(0,0,0,0.05);
+  transition: background-color 0.2s;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.actions button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button.edit {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+button.edit:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+button.delete {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+button.delete:hover {
+  background-color: var(--danger-hover);
+  transform: translateY(-1px);
+}
+
+/* Pagination moderne */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.pagination button:disabled {
+  background-color: var(--border-color);
+  cursor: default;
+}
+
+.pagination button:not(:disabled):hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.pagination .page-info {
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+/* Modals : mêmes styles que précédemment */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: var(--container-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  color: var(--text-color);
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.modal-field-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  width: 100%;
+}
+
+.modal-field-row label {
+  flex: 0 0 140px;
+  font-size: 0.95rem;
+}
+
+.modal-field-row input[type="text"] {
+  flex: 1;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.modal-field-row input[type="text"]:focus {
+  border-color: var(--input-focus);
+  outline: none;
+}
+
+.modal-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.modal-actions button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.modal-actions button[type="submit"] {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.modal-actions button[type="submit"]:hover {
+  background-color: var(--success-hover);
+  transform: translateY(-1px);
+}
+
+.modal-actions button#cancelEdit,
+.modal-actions button#cancelDeleteBtn {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.modal-actions button#cancelEdit:hover,
+.modal-actions button#cancelDeleteBtn:hover {
+  background-color: var(--danger-hover);
+  transform: translateY(-1px);
+}
+
+/* Même style pour Code Chimique et Code Commercial */
+td:nth-child(1),
+td:nth-child(2) {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+
