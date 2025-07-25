@@ -7,42 +7,50 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Gestion des Codes de Carrelage</h1>
-      <button id="toggleTheme" class="theme-toggle">🌙 Mode sombre</button>
-    </header>
-
-    <!-- Barre de recherche -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Rechercher par code chimique ou commercial...">
-    </div>
+  <div class="layout">
     
-    <!-- Formulaire d'ajout -->
-    <form id="addCodeForm">
-      <input type="text" id="codeChimique" placeholder="Code Chimique" required />
-      <input type="text" id="codeCommercial" placeholder="Code Commercial" required />
-      <button type="submit">Ajouter</button>
-    </form>
+    <!-- 🟩 Sidebar simple -->
+    <aside class="sidebar">
+      <h1>Gestion Codes</h1>
+      <button id="toggleTheme" class="theme-toggle">🌙 Mode sombre</button>
 
-    <!-- Tableau des codes -->
-    <table>
-      <thead>
-        <tr>
-          <th>Code Chimique</th>
-          <th>Code Commercial</th>
-          <th>Date Création</th>
-          <th>Dernière Modification</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="codesList">
-        <!-- Lignes ajoutées dynamiquement -->
-      </tbody>
-    </table>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Rechercher...">
+      </div>
+
+      <div class="export-import-bar">
+        <button id="importBtn">📥 Import JSON</button>
+        <button id="exportBtn">📤 Export JSON</button>
+        <input type="file" id="importFile" accept="application/json" style="display: none;">
+      </div>
+    </aside>
+
+    <!-- 🟦 Contenu principal -->
+    <main class="content">
+      <form id="addCodeForm">
+        <input type="text" id="codeChimique" placeholder="Code Chimique" required />
+        <input type="text" id="codeCommercial" placeholder="Code Commercial" required />
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Code Chimique</th>
+            <th>Code Commercial</th>
+            <th>Date Création</th>
+            <th>Dernière Modification</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="codesList">
+          <!-- Lignes ajoutées dynamiquement -->
+        </tbody>
+      </table>
+    </main>
   </div>
 
-  <!-- Modal modification -->
+  <!-- Modals inchangés -->
   <div id="editModal" class="modal hidden">
     <div class="modal-content">
       <h2>Modifier le code</h2>
@@ -63,7 +71,6 @@
     </div>
   </div>
 
-  <!-- Modal confirmation suppression -->
   <div id="confirmDeleteModal" class="modal hidden">
     <div class="modal-content">
       <h2>Confirmer la suppression</h2>
@@ -71,6 +78,19 @@
       <div class="modal-actions">
         <button id="confirmDeleteBtn">Oui</button>
         <button type="button" id="cancelDeleteBtn">Non</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌟 Nouvelle modal pour l'import -->
+  <div id="importChoiceModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Importer les données</h2>
+      <p style="text-align:center; margin:1rem 0;">Voulez-vous remplacer les données existantes ou ajouter ?</p>
+      <div class="modal-actions">
+        <button id="replaceImportBtn">Remplacer</button>
+        <button id="addImportBtn">Ajouter</button>
+        <button type="button" id="cancelImportBtn">Annuler</button>
       </div>
     </div>
   </div>

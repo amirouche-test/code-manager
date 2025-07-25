@@ -1,13 +1,13 @@
 :root {
   /* 🌞 Light mode - Parrot OS Inspired */
-  --bg-color: #f0f8ff;                 /* Alice Blue */
+  --bg-color: #f0f8ff;                 
   --container-bg: #e8f1fb;
   --text-color: #0b0c10;
-  --primary-color: #008080;            /* Teal */
+  --primary-color: #008080;            
   --primary-hover: #006666;
-  --success-color: #00ff9c;            /* Vert néon Parrot */
+  --success-color: #00ff9c;            
   --success-hover: #00cc7a;
-  --danger-color: #ff1744;             /* Rouge vif */
+  --danger-color: #ff1744;             
   --danger-hover: #c4001d;
   --border-color: #cfd8dc;
   --thead-bg: #008080;
@@ -20,7 +20,7 @@ body.dark-mode {
   --bg-color: #0e1116;
   --container-bg: #13181f;
   --text-color: #e0f7fa;
-  --primary-color: #00e5ff;            /* Bleu néon */
+  --primary-color: #00e5ff;            
   --primary-hover: #00bcd4;
   --success-color: #00ff9c;
   --success-hover: #00cc7a;
@@ -31,7 +31,6 @@ body.dark-mode {
   --thead-text: #0e1116;
   --input-focus: #00ff9c;
 }
-
 
 /* Reset & base */
 * {
@@ -46,21 +45,56 @@ body {
   color: var(--text-color);
   display: flex;
   justify-content: center;
-  padding: 1rem;
+  padding: 0;
   transition: background 0.3s, color 0.3s;
 }
 
-.container {
+/* 🪟 Nouveau layout Discord-like */
+.layout {
+  display: flex;
+  min-height: 100vh;
   width: 100%;
-  max-width: 1400px;
-  min-width: 1000px;
-  background-color: var(--container-bg);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  background-color: var(--bg-color);
+  min-width: 1200px;
 }
 
-/* Header */
+.sidebar {
+  width: 250px;
+  background-color: var(--container-bg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+}
+
+.sidebar h1 {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.sidebar .theme-toggle {
+  width: 100%;
+}
+
+.sidebar .search-bar {
+  width: 100%;
+}
+
+.sidebar .export-import-bar {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  overflow-x: auto;
+}
+
+/* Header (plus utilisé mais conservé si tu le gardes) */
 header {
   display: flex;
   justify-content: space-between;
@@ -162,7 +196,7 @@ thead {
 }
 
 th, td {
-  padding: 0.6rem 1rem;
+  padding: 0.6rem;
   border-bottom: 1px solid var(--border-color);
   font-size: 1rem;
 }
@@ -222,7 +256,7 @@ button.delete:hover {
   transform: translateY(-1px);
 }
 
-/* Pagination moderne */
+/* Pagination */
 .pagination {
   display: flex;
   justify-content: center;
@@ -364,4 +398,27 @@ td:nth-child(2) {
   color: var(--primary-color);
 }
 
+/* 📦 Export / Import bar */
+.export-import-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
 
+.export-import-bar button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.export-import-bar button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}

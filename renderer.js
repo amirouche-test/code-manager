@@ -17,7 +17,7 @@ function saveCodes(codes) {
 
 // 📄 Pagination
 let currentPage = 1;
-const itemsPerPage = 6; // ✅ 6 lignes par page
+const itemsPerPage = 9;
 let currentFilter = '';
 
 // 🖼 Affichage des codes + pagination
@@ -26,7 +26,6 @@ function renderCodes() {
   codesList.innerHTML = '';
   let codes = getCodes();
 
-  // Filtrer si recherche
   if (currentFilter.trim() !== '') {
     const f = currentFilter.trim().toLowerCase();
     codes = codes.filter(c =>
@@ -35,7 +34,7 @@ function renderCodes() {
     );
   }
 
-  codes = codes.slice().reverse(); // dernier ajouté en premier
+  codes = codes.slice().reverse();
 
   const totalPages = Math.ceil(codes.length / itemsPerPage);
   if (currentPage > totalPages) currentPage = totalPages || 1;
@@ -62,13 +61,13 @@ function renderCodes() {
   renderPagination(totalPages);
 }
 
-// 📌 Pagination boutons
+// 📌 Pagination
 function renderPagination(totalPages) {
   let container = document.querySelector('.pagination');
   if (!container) {
     container = document.createElement('div');
     container.className = 'pagination';
-    document.querySelector('.container').appendChild(container);
+    document.querySelector('.content').appendChild(container);
   }
   container.innerHTML = '';
 
@@ -95,17 +94,21 @@ function renderPagination(totalPages) {
 // ➕ Ajouter
 document.getElementById('addCodeForm').addEventListener('submit', e => {
   e.preventDefault();
-  const codeChimique = document.getElementById('codeChimique').value.trim();
-  const codeCommercial = document.getElementById('codeCommercial').value.trim();
+  const codeChimiqueInput = document.getElementById('codeChimique');
+  const codeCommercialInput = document.getElementById('codeCommercial');
+  const codeChimique = codeChimiqueInput.value.trim();
+  const codeCommercial = codeCommercialInput.value.trim();
   if (!codeChimique || !codeCommercial) return;
 
   const codes = getCodes();
   const now = new Date().toLocaleString();
   codes.push({ codeChimique, codeCommercial, createdAt: now, updatedAt: now });
   saveCodes(codes);
-  currentPage = 1; // pour voir le nouveau
+  currentPage = 1;
   renderCodes();
-  e.target.reset();
+
+  codeChimiqueInput.value = '';
+  codeCommercialInput.value = '';
 });
 
 // ✏️ Modifier
@@ -168,6 +171,59 @@ document.getElementById('searchInput').addEventListener('input', e => {
   currentFilter = e.target.value;
   currentPage = 1;
   renderCodes();
+});
+
+// 📥 Import (avec modal custom)
+let importedData = null;
+const importChoiceModal = document.getElementById('importChoiceModal');
+document.getElementById('importBtn').addEventListener('click', () => {
+  document.getElementById('importFile').click();
+});
+document.getElementById('importFile').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = event => {
+    try {
+      importedData = JSON.parse(event.target.result);
+      if (!Array.isArray(importedData)) {
+        alert('Fichier invalide (il faut un tableau).'); return;
+      }
+      if (!importedData.every(c => 'codeChimique' in c && 'codeCommercial' in c)) {
+        alert('Chaque objet doit contenir "codeChimique" et "codeCommercial".'); return;
+      }
+      importChoiceModal.classList.remove('hidden');
+    } catch (err) {
+      alert('Erreur lors de la lecture du fichier JSON.');
+    }
+  };
+  reader.readAsText(file);
+});
+document.getElementById('replaceImportBtn').addEventListener('click', () => {
+  saveCodes(importedData);
+  importChoiceModal.classList.add('hidden');
+  renderCodes();
+});
+document.getElementById('addImportBtn').addEventListener('click', () => {
+  const merged = getCodes().concat(importedData);
+  saveCodes(merged);
+  importChoiceModal.classList.add('hidden');
+  renderCodes();
+});
+document.getElementById('cancelImportBtn').addEventListener('click', () => {
+  importChoiceModal.classList.add('hidden');
+});
+
+// 📤 Export
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const data = JSON.stringify(getCodes(), null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'codes.json';
+  a.click();
+  URL.revokeObjectURL(url);
 });
 
 // ✅ Charger au démarrage
